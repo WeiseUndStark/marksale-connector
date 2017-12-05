@@ -30,7 +30,7 @@ class Client
      * @param bool $visitorBased
      * @return array
      */
-    private function _doRequest(
+    public function doRequest(
         string $uri,
         array $formParams = [],
         string $method = 'GET',
