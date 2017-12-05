@@ -31,8 +31,11 @@ class ContactUtil
      */
     public function getContactByPurl(string $purl): Contact
     {
+        list($firstName, $lastname) = explode('-', $purl);
+
         return (new Contact())
-            ->setFirstName('Christian '.$purl);
+            ->setFirstName(ucfirst($firstName))
+            ->setLastName(ucfirst($lastname));
     }
 
     /**

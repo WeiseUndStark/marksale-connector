@@ -10,9 +10,14 @@ namespace WeiseUndStark\MarksaleConnector\Entity;
 final class Contact
 {
     /**
-     * @var string
+     * @var null|string
      */
     protected $firstName;
+
+    /**
+     * @var null|string
+     */
+    protected $lastName;
 
     /**
      * Contact constructor.
@@ -22,20 +27,39 @@ final class Contact
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getFirstName(): string
+    public function getFirstName(): ?string
     {
         return $this->firstName;
     }
 
     /**
-     * @param string $firstName
+     * @param null|string $firstName
      * @return Contact
      */
-    public function setFirstName(string $firstName): Contact
+    public function setFirstName(?string $firstName): Contact
     {
         $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * @param null|string $lastName
+     * @return Contact
+     */
+    public function setLastName(?string $lastName): Contact
+    {
+        $this->lastName = $lastName;
 
         return $this;
     }
