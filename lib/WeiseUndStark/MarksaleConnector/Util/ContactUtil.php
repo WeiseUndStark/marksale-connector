@@ -21,9 +21,6 @@ class ContactUtil
     public function __construct(string $clientAlias)
     {
         //
-        session_start();
-
-        //
         $this->client = new Client(['base_uri' => 'http://'.$clientAlias.'.marksale.de']);
     }
 
@@ -85,16 +82,8 @@ class ContactUtil
 
         //
         if ($visitorBased) {
-            if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-                $ip = $_SERVER['HTTP_CLIENT_IP'];
-            } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-                $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-            } else {
-                $ip = $_SERVER['REMOTE_ADDR'];
-            }
-
             $return['marksale-visitor-session'] = session_id();
-            $return['marksale-visitor-ip'] = $ip;
+            $return['marksale-visitor-ip'] = $this->_getClientIpAddress();
         }
 
         //
@@ -104,5 +93,23 @@ class ContactUtil
 
         //
         return $return;
+    }
+
+    /**
+     * @return int|null
+     */
+    private function _getClientIpAddress(): ?int
+    {
+        $ip = null;
+
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+
+        return $ip;
     }
 }
