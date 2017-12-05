@@ -2,28 +2,25 @@
 
 namespace WeiseUndStark\MarksaleConnector\Util;
 
-use GuzzleHttp\Client;
 use WeiseUndStark\MarksaleConnector\Entity\Contact;
 
 /**
- * Class Contact
+ * Class ContactUtil
  * @package WeiseUndStark\MarksaleConnector\Util
  * @since 1.0
  */
 class ContactUtil
 {
-    private $client;
+    private $connectorUtil;
 
     /**
      * ContactUtil constructor.
-     * @param string $clientAlias
+     * @param Client $connectorUtil
      */
-    public function __construct(string $clientAlias)
+    public function __construct(Client $connectorUtil)
     {
-        //
-        $this->client = new Client(['base_uri' => 'http://'.$clientAlias.'.marksale.de']);
+        $this->connectorUtil = $connectorUtil;
     }
-
 
     /**
      * @param string $purl
@@ -36,85 +33,5 @@ class ContactUtil
         return (new Contact())
             ->setFirstName(ucfirst($firstName))
             ->setLastName(ucfirst($lastname));
-    }
-
-    /**
-     * @param string $uri
-     * @param array $formParams
-     * @param string $method
-     * @param bool $visitorBased
-     * @return array
-     */
-    private function _doRequest(
-        string $uri,
-        array $formParams = [],
-        string $method = 'GET',
-        bool $visitorBased = true
-    ): array {
-        //
-        $options = [
-            'headers' => $this->_createSecuredHeader($visitorBased),
-        ];
-
-        //
-        if (!empty($formParams)) {
-            $options['form_params'] = $formParams;
-        }
-
-        //
-        $response = $this->client->request($method, $uri, $options);
-
-        //
-        $contents = $response->getBody()->getContents();
-
-        //
-        return json_decode($contents, true);
-    }
-
-    /**
-     * @param string $apiKey
-     * @param bool $visitorBased
-     * @return array
-     */
-    private function _createSecuredHeader(string $apiKey, $visitorBased = true): array
-    {
-        //
-        $return = [
-            'x-api-key' => $apiKey,
-        ];
-
-        //
-        if ($visitorBased) {
-            $return['marksale-visitor-session'] = session_id();
-            $return['marksale-visitor-ip'] = $this->_getClientIpAddress();
-        }
-
-        //
-        if ($mssvid = $_COOKIE['mssvid']) {
-            $return['mssvid'] = $mssvid;
-        }
-
-        //
-        return $return;
-    }
-
-    /**
-     * @return null|string
-     */
-    private function _getClientIpAddress(): ?string
-    {
-        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-            return $_SERVER['HTTP_CLIENT_IP'];
-        }
-
-        if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            return $_SERVER['HTTP_X_FORWARDED_FOR'];
-        }
-
-        if (!empty($_SERVER['REMOTE_ADDR'])) {
-            return $_SERVER['REMOTE_ADDR'];
-        }
-
-        return null;
     }
 }
