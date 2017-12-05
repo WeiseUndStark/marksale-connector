@@ -1,0 +1,16 @@
+{
+    "name": "weiseundstark/marksale-connector",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Christian Kehres",
+            "email": "christian.kehres@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "WeiseUndStark\\MarksaleConnector\\": "lib/WeiseUndStark/MarksaleConnector"
+        }
+    },
+}
