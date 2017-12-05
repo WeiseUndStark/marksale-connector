@@ -96,20 +96,22 @@ class ContactUtil
     }
 
     /**
-     * @return int|null
+     * @return null|string
      */
-    private function _getClientIpAddress(): ?int
+    private function _getClientIpAddress(): ?string
     {
-        $ip = null;
-
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-            $ip = $_SERVER['HTTP_CLIENT_IP'];
-        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        } else {
-            $ip = $_SERVER['REMOTE_ADDR'];
+            return $_SERVER['HTTP_CLIENT_IP'];
         }
 
-        return $ip;
+        if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            return $_SERVER['HTTP_X_FORWARDED_FOR'];
+        }
+
+        if (!empty($_SERVER['REMOTE_ADDR'])) {
+            return $_SERVER['REMOTE_ADDR'];
+        }
+
+        return null;
     }
 }
