@@ -7,7 +7,9 @@
       "email": "christian.kehres@gmail.com"
     }
   ],
-  "require": {},
+  "require": {
+    "guzzlehttp/guzzle": "^6.2"
+  },
   "autoload": {
     "psr-4": {
       "WeiseUndStark\\MarksaleConnector\\": "lib/WeiseUndStark/MarksaleConnector"
