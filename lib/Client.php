@@ -75,7 +75,7 @@ class Client
         }
 
         //
-        if ($mssvid = $_COOKIE['mssvid']) {
+        if (isset($_COOKIE['mssvid']) && $mssvid = $_COOKIE['mssvid']) {
             $return['mssvid'] = $mssvid;
         }
 

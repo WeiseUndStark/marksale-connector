@@ -12,12 +12,15 @@
   },
   "autoload": {
     "psr-4": {
-      "WeiseUndStark\\MarksaleConnector\\": "lib/WeiseUndStark/MarksaleConnector"
+      "WeiseUndStark\\MarksaleConnector\\": "lib"
     }
   },
   "extra": {
     "branch-alias": {
       "dev-master": "1.0.x-dev"
     }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.5"
   }
 }
