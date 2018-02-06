@@ -33,6 +33,9 @@ class ContactUtil
         $purlData = $this->connectorUtil->doRequest('/contact_api/byPurl/'.trim(strtolower($purl)));
 
         //
+        setcookie("msph", $purlData['hash']);
+
+        //
         $contactData = $purlData['contact'];
 
         //
