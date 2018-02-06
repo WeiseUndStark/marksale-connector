@@ -33,7 +33,7 @@ class PurlUtil
             return false;
         }
 
-        $this->connectorUtil->doRequest('/contact_api/setConvertedByPurlHash/'.$hash);
+        $this->connectorUtil->doRequest('/contact_api/setConvertedByPurlHash/'.$hash, [], 'PATCH');
 
         return true;
     }
