@@ -82,6 +82,10 @@ class ContactUtil
             $contact->setCity($contactData['city']);
         }
 
+        if (isset($contactData['phone_number'])) {
+            $contact->setPhoneNumber($contactData['phone_number']);
+        }
+
         //
         return $contact;
     }

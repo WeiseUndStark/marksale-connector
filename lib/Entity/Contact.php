@@ -65,6 +65,11 @@ final class Contact
     protected $city;
 
     /**
+     * @var null|string
+     */
+    protected $phoneNumber;
+
+    /**
      * Contact constructor.
      */
     public function __construct()
@@ -276,6 +281,25 @@ final class Contact
     public function setCity(?string $city): Contact
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getPhoneNumber(): ?string
+    {
+        return $this->phoneNumber;
+    }
+
+    /**
+     * @param null|string $phoneNumber
+     * @return Contact
+     */
+    public function setPhoneNumber(?string $phoneNumber): Contact
+    {
+        $this->phoneNumber = $phoneNumber;
 
         return $this;
     }
