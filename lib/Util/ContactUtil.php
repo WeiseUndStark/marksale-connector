@@ -30,7 +30,7 @@ class ContactUtil
     public function getContactByPurl(string $purl): Contact
     {
         //
-        $purlData = $this->connectorUtil->doRequest('/contact_api/byPurl/'.$purl);
+        $purlData = $this->connectorUtil->doRequest('/contact_api/byPurl/'.trim(strtolower($purl)));
 
         //
         $contactData = $purlData['contact'];
